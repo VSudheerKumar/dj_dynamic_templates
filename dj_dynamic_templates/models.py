@@ -63,7 +63,7 @@ class Category(BaseModel):
             return list()
 
     def clean(self):
-        base_filter = self.__class__.objects.filter(is_active=True, app_name=self.app_name, name=self.name)
+        base_filter = self.__class__.objects.filter(app_name=self.app_name, name=self.name)
         if self.pk:
             base_filter = base_filter.exclude(id=self.id)
         if base_filter.exists():
