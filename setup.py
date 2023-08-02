@@ -16,12 +16,17 @@ setup(name='dj_dynamic_templates',
       ],
       install_requires=[
             'Django>=3.0',
-            'django-markdownx>=4.0.2'
       ],
       url='https://github.com/VSudheerKumar/dj_dynamic_templates',
       license='MIT',
       platforms=['any'],
-      package_data={'dj_dynamic_templates': ['templates/**/*.html']}
+      package_data={'dj_dynamic_templates': ['templates/**/*.html']},
+      entry_points= {
+            "console_scripts": [
+                  "django-markdownx = entry:install_django_markdownx"
+            ]
+      }
+
 
 
       )
