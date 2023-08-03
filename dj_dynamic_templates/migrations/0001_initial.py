@@ -4,7 +4,12 @@ import dj_dynamic_templates.validators
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import markdownx.models
+
+try:
+    import markdownx.models
+    markdownx_exist = True
+except ModuleNotFoundError:
+    markdownx_exist = False
 
 
 class Migration(migrations.Migration):
@@ -42,7 +47,7 @@ class Migration(migrations.Migration):
                 ('remarks', models.TextField(blank=True, null=True)),
                 ('is_active', models.BooleanField(default=True)),
                 ('code', models.PositiveBigIntegerField()),
-                ('body_content', markdownx.models.MarkdownxField()),
+                ('body_content', markdownx.models.MarkdownxField()) if markdownx_exist else ('body_content', markdownx.models.MarkdownxField()),
                 ('style_content', models.TextField(blank=True)),
                 ('script_content', models.TextField(blank=True)),
                 ('name', models.CharField(help_text='Entered name will treated as template file name, A template file is created with this file name', max_length=50)),
