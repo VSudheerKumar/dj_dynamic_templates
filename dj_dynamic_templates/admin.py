@@ -76,6 +76,10 @@ class MailTemplateModelAdmin(BaseModelAdmin, MarkdownxModelAdmin, MailTemplateMo
         'body_props': SimpleNamespace(length_of_start_key=len(template_blocks[2]))
     }
 
+    def history_view(self, request, object_id, extra_context=None):
+        if not request.user.has_perm('can_view_history'):
+            return None
+        return super(BaseModelAdmin, self).history_view(request, object_id, extra_context)
 
     def get_queryset(self, request):
         queryset = self.model.objects.all()

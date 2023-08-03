@@ -158,5 +158,6 @@ class MailTemplate(BaseModel):
             ('can_view_inactive_objects', 'Can view Inactive Objects'),
             ('can_sync_templates', 'Can Sync Templates'),
             ('can_view_created_by', 'Can View Created By'),
+            ('can_view_history', 'Can View History')
         )
 
