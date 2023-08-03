@@ -31,9 +31,7 @@ class BaseModel(models.Model):
         pass
 
     def soft_save(self):
-        if not self.pk:
-            self.code = self.get_code()
-        else:
+        if self.pk:
             self.__class__.objects.filter(id=self.id).update(is_active=False)
             self.parent_obj_id = self.id
             self.pk = None
@@ -158,5 +156,6 @@ class MailTemplate(BaseModel):
             ('can_view_inactive_objects', 'Can view Inactive Objects'),
             ('can_sync_templates', 'Can Sync Templates'),
             ('can_view_created_by', 'Can View Created By'),
+            ('can_view_history', 'Can View History')
         )
 

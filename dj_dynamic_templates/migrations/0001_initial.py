@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                 'verbose_name': 'DJ Dynamic Template - Mail Template',
                 'verbose_name_plural': "DJ Dynamic Template - Mail Template's",
                 'db_table': 'dj_dynamic_templates__mail_template',
-                'permissions': (('can_view_inactive_objects', 'Can view Inactive Objects'), ('can_sync_templates', 'Can Sync Templates'), ('can_view_created_by', 'Can View Created By')),
+                'permissions': (('can_view_inactive_objects', 'Can view Inactive Objects'), ('can_sync_templates', 'Can Sync Templates'), ('can_view_created_by', 'Can View Created By'), ('can_view_history', 'Can View History')),
                 'managed': True,
             },
         ),
