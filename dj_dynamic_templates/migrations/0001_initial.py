@@ -28,8 +28,8 @@ class Migration(migrations.Migration):
                 ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
-                'verbose_name': 'DJ Dynamic Template Category',
-                'verbose_name_plural': 'DJ Dynamic Template Categories',
+                'verbose_name': ' DJ Dynamic Template Category',
+                'verbose_name_plural': ' DJ Dynamic Template Categories',
                 'db_table': 'dj_dynamic_templates__category',
                 'managed': True,
             },
