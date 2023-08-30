@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.urls import path
 from django.utils.html import format_html
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from types import SimpleNamespace
 
 from .views import *
@@ -43,11 +44,26 @@ class CategoryModelAdmin(BaseModelAdmin, CategoryModelAdminUtils):
     actions = ('create_directory', )
     search_fields = ('name', )
 
+    change_form_template = 'dj_dynamic_templates_admin/category_change_form.html'
+
     def get_readonly_fields(self, request, obj=None):
         readonly_fields = self.readonly_fields
         if obj:
             readonly_fields += ('created_by', 'is_directory_exist', 'files_in_directory', 'app_name', 'code')
         return readonly_fields
+
+    def response_change(self, request, obj):
+        print(request.POST)
+        if 'clear_all_files_in_directory' in request.POST:
+            file_count = 0
+            for file in os.listdir(obj.get_directory_path()):
+                file = obj.get_directory_path() + f'/{file}'
+                file_or_dir_remove_signal.send(path=file, deleted=True, sender=None)
+                os.remove(file)
+                file_count += 1
+            self.message_user(request, f'Cleared {file_count} files')
+            return HttpResponseRedirect('.')
+        return super(CategoryModelAdmin, self).response_change(request, obj)
 
     # actions
     def delete_model(self, request, obj):

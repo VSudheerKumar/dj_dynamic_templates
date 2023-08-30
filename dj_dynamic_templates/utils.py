@@ -61,7 +61,8 @@ class CategoryModelAdminUtils:
             return False
 
     def _pre_save_model(self, request, obj, form, change):
-        self.make_dir(request, obj, change=change)
+        if any(button in request.POST for button in ['_addanother', '_save', '_continue']):
+            self.make_dir(request, obj, change=change)
 
 
 class MailTemplateModelAdminUtils:
