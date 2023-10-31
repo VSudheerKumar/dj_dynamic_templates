@@ -1,0 +1,14 @@
+name: Development
+
+on:
+  push:
+    branches: development
+
+jobs:
+  Clone:
+    runs-on: django
+    steps:
+      - name: Clone repositories
+        uses: actions/checkout@v4
+        with:
+          path: 'development'
